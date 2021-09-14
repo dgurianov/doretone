@@ -14,7 +14,12 @@ public enum GuiVariables {
     CHORD_RND_BUTTON_STOP("Stop"),
     CHORD_RND_BORDER_FORM_PANEL("Generate random chord"),
     CHORD_RND_BORDER_CHORD_PANEL("Generated chord"),
-    CHORD_RND_LABEL_NO_CHORD("No chord");
+    CHORD_RND_LABEL_NO_CHORD("No chord"),
+
+    //Interval Legend Table
+    INTVL_LEGEND_PANEL_HEADER("Interval legend"),
+
+    NOTES_NECK_HEADER("Notes on the neck of guitar");
 
 
     private String value;

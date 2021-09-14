@@ -35,7 +35,7 @@ public class ChordPanel extends JPanel {
         displayLabel.setText(chord);
     }
 
-    public void setChordColor(String[] chordColored){
+    public void setChordAndColor(String[] chordColored){
         if(chordColored[0].equalsIgnoreCase("0")){
             //Minor, blue
             displayLabel.setForeground(Color.blue);
