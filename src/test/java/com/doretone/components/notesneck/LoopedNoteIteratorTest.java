@@ -24,7 +24,7 @@ public class LoopedNoteIteratorTest {
     @Test
     public void testNextNote() throws InvalidNoteException{
         loopedNoteIterator = new LoopedNoteIterator("E");
-        assertEquals("Expected F ", loopedNoteIterator.next(),"F");
+        assertEquals("Expected E ", loopedNoteIterator.next(),"E");
     }
 
     @Test(expected = InvalidNoteException.class)

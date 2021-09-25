@@ -9,16 +9,16 @@ public class LoopedNoteIterator implements Iterator<String> {
 
     private final String[] container = new String[]{
             "C",       //0
-            "C#/bD",   //1
+            "C#/Db",   //1
             "D",       //2
-            "D#/bE",   //3
+            "D#/Eb",   //3
             "E",       //4
             "F",       //5
-            "F#/bG",   //6
+            "F#/Gb",   //6
             "G",       //7
-            "G#/bA",   //8
+            "G#/Ab",   //8
             "A",       //9
-            "A#/bH",   //10
+            "A#/Hb",   //10
             "H"};      //11
     private int currentPosition;
 
@@ -42,7 +42,6 @@ public class LoopedNoteIterator implements Iterator<String> {
         if(this.currentPosition == container.length){
             this.currentPosition = 0;
             return next();
-//            return container[currentPosition];
         }
         this.currentPosition++;//Move to next
         return container[currentPosition-1];// Return one before roll forward

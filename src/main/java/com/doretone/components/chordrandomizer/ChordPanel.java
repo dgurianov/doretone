@@ -14,7 +14,6 @@ public class ChordPanel extends JPanel {
     public ChordPanel() {
         invisibleLabel  = new JLabel(GuiVariables.GLB_EMPTY.getValue());
         displayLabel = new JLabel(GuiVariables.CHORD_RND_LABEL_NO_CHORD.getValue(), SwingConstants.CENTER);
-        displayLabel.setFont(new Font("Serif", Font.BOLD, 60));
 
 
         //Setting form border
@@ -28,6 +27,8 @@ public class ChordPanel extends JPanel {
         Dimension dim = getPreferredSize();
         dim.width = 250;
         setPreferredSize(dim);
+        setMaximumSize(dim);
+        setMinimumSize(dim);
 
     }
 
@@ -36,6 +37,7 @@ public class ChordPanel extends JPanel {
     }
 
     public void setChordAndColor(String[] chordColored){
+        displayLabel.setFont(new Font("Serif", Font.BOLD, 60));
         if(chordColored[0].equalsIgnoreCase("0")){
             //Minor, blue
             displayLabel.setForeground(Color.blue);

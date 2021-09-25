@@ -6,15 +6,10 @@ import com.doretone.core.GuiVariables;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.EventObject;
 
 public class ChordFormPanel extends JPanel implements ActionListener  {
 
@@ -39,6 +34,12 @@ public class ChordFormPanel extends JPanel implements ActionListener  {
         listenerList =  new EventListenerList();
 
         startButton.addActionListener(this);
+
+        Dimension dim = getPreferredSize();
+        dim.width = 250;
+        setPreferredSize(dim);
+        setMaximumSize(dim);
+        setMinimumSize(dim);
 
         //Setting form border
         Border innerBorder = BorderFactory.createTitledBorder(GuiVariables.CHORD_RND_BORDER_FORM_PANEL.getValue());

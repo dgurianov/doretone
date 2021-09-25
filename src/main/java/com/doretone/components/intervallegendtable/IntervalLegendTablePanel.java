@@ -17,6 +17,12 @@ public class IntervalLegendTablePanel extends JPanel {
         DefaultTableModel dtm = new DefaultTableModel(container.getTableHeader(),0);
         table = new IntervalLegendTable(dtm);
         setLayout(new BorderLayout());
+        Dimension dim = getPreferredSize();
+        dim.width = 200;
+        dim.height = 50;
+        setPreferredSize(dim);
+        setMaximumSize(dim);
+        setMinimumSize(dim);
         //Setting form border
         Border innerBorder = BorderFactory.createTitledBorder(GuiVariables.INTVL_LEGEND_PANEL_HEADER.getValue() );
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
@@ -25,6 +31,7 @@ public class IntervalLegendTablePanel extends JPanel {
             dtm.addRow(s);
 
         }
+
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
 }

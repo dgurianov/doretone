@@ -68,8 +68,6 @@ public class NoteNeckContainer {
         importantIntervalsMap.put("A", new String[]{"A","C","C#","E","G"});
         importantIntervalsMap.put("A#", new String[]{"A#","C#","D","F","G#"});
         importantIntervalsMap.put("H", new String[]{"H","D","D#","F#","A"});
-
-
     }
 
 
@@ -84,20 +82,6 @@ public class NoteNeckContainer {
     //Returns array of 4 elemets : tonica , Min3, Maj3 , Perf5
     public  String[] getImportantIntervalsOf(String note){
         //TODO: replace fixed map of intervals with some generator.
-        //SOlution below is too slow and does not keep up with speed of fired events
-//        this.noteIterator = new LoopedNoteIterator(note);
-//        for (int i = 0; i < 8 ; i++) {
-//            if(i == 0 ){
-//                result[0] = this.noteIterator.next();
-//            }else if (i == 3){
-//                result[1] = this.noteIterator.next();
-//            }else if(i == 4 ){
-//
-//            }else if ( i == 7){
-//                result[3] = this.noteIterator.next();
-//            }
-//
-//        }
         return importantIntervalsMap.get(note);
     }
 

@@ -11,7 +11,6 @@ public enum IntervalLegendColor {
     PERFECT5(new Color(255, 204, 153)),//#ffcc99
     MINOR7(new Color(153, 204, 255)),//#99ccff
     MAJOR7(new Color(255, 153, 255)),
-
     ;
     private Color value;
 

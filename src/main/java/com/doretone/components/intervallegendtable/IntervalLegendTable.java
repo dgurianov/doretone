@@ -16,7 +16,7 @@ public class IntervalLegendTable extends JTable {
         super(dm);
         //Set column sizes
         //Total available width
-        setAutoResizeMode(JTable.AUTO_RESIZE_OFF);//Do not resize columns automagically
+        setAutoResizeMode(JTable.AUTO_RESIZE_OFF);//Do not resize columns automagically, cause it does not honor fields for specific language
         getColumnModel().getColumn(ColumnOrder.getColumnPositionByLegendKey(IntervalLegendKeys.SEMITONES)).setPreferredWidth(IntervalLegendColumnWidth.SEMITONES.getValue());
         getColumnModel().getColumn(ColumnOrder.getColumnPositionByLegendKey(IntervalLegendKeys.RUS)).setPreferredWidth(IntervalLegendColumnWidth.RUS.getValue());
         getColumnModel().getColumn(ColumnOrder.getColumnPositionByLegendKey(IntervalLegendKeys.ENG)).setPreferredWidth(IntervalLegendColumnWidth.ENG.getValue());
@@ -43,9 +43,6 @@ public class IntervalLegendTable extends JTable {
         }else{
             comp.setBackground(IntervalLegendColor.DEFAULT.getValue());
         }
-
-
-
 
         return comp;
     }

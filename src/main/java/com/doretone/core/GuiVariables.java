@@ -3,7 +3,7 @@ package com.doretone.core;
 public enum GuiVariables {
     //Global
     GLB_EMPTY(""),
-    GLB_APP_VERSION("1.0.0"),
+    GLB_APP_VERSION("1.2.0"),
 
     //Main window
     MAIN_FRAME_HEADER_MESSAGE("Do Re Tone guitar helper"),
