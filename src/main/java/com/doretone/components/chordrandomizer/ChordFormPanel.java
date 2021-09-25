@@ -1,14 +1,17 @@
 package com.doretone.components.chordrandomizer;
 
+import com.doretone.components.events.ChordChangeEvent;
+import com.doretone.components.listeners.ChordChangeListener;
 import com.doretone.core.GuiVariables;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FormPanel extends JPanel implements ActionListener {
+public class ChordFormPanel extends JPanel implements ActionListener  {
 
     private final JLabel timeIntervalLabel;
     private final JTextField timeIntervalField;
@@ -18,8 +21,9 @@ public class FormPanel extends JPanel implements ActionListener {
     private final ChordPanel chordPanel;
     private Timer timer ;
     private final ChordsList chordsList ;
+    private EventListenerList listenerList;
 
-    public FormPanel() {
+    public ChordFormPanel() {
         timeIntervalLabel = new JLabel(GuiVariables.CHORD_RND_LABEL_TIME_INTERVAL.getValue());
         invisibleLabel  = new JLabel(GuiVariables.GLB_EMPTY.getValue());
         displayLabel = new JLabel(GuiVariables.CHORD_RND_LABEL_NO_CHORD.getValue());
@@ -27,8 +31,15 @@ public class FormPanel extends JPanel implements ActionListener {
         timeIntervalField = new JTextField("3",2);
         chordPanel = new ChordPanel();
         chordsList = new ChordsList();
+        listenerList =  new EventListenerList();
 
         startButton.addActionListener(this);
+
+        Dimension dim = getPreferredSize();
+        dim.width = 250;
+        setPreferredSize(dim);
+        setMaximumSize(dim);
+        setMinimumSize(dim);
 
         //Setting form border
         Border innerBorder = BorderFactory.createTitledBorder(GuiVariables.CHORD_RND_BORDER_FORM_PANEL.getValue());
@@ -51,6 +62,7 @@ public class FormPanel extends JPanel implements ActionListener {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         add(timeIntervalField,gbc);
 
         //Second row
@@ -81,18 +93,41 @@ public class FormPanel extends JPanel implements ActionListener {
         if(e.getSource() == startButton && startButton.getText().equalsIgnoreCase(GuiVariables.CHORD_RND_BUTTON_START.getValue())){
             this.timer = new Timer(Integer.parseInt(timeIntervalField.getText()) * 1000, this);
             timer.start();
-//            chordPanel.setChord(chordsList.getRandom());
-            chordPanel.setChordColor(chordsList.getRandomMajMin());
+            String[] newChord = chordsList.getRandomMajMin();
+            ChordChangeEvent event = new ChordChangeEvent(this, newChord[1]);
+            fireDetailEvent(event);
+            chordPanel.setChordAndColor(newChord);
             startButton.setText(GuiVariables.CHORD_RND_BUTTON_STOP.getValue());
 
         }else if (e.getSource() == startButton && startButton.getText().equalsIgnoreCase(GuiVariables.CHORD_RND_BUTTON_STOP.getValue())){
             timer.stop();
             startButton.setText(GuiVariables.CHORD_RND_BUTTON_START.getValue());
         }else {
-//            chordPanel.setChord(chordsList.getRandom());
-            chordPanel.setChordColor(chordsList.getRandomMajMin());
+            //Go through listenerList , find proper ChordChangeListener listener and  trigger event occured with chord change event
+            String[] newChord = chordsList.getRandomMajMin();
+            ChordChangeEvent event = new ChordChangeEvent(this, newChord[1]);
+            fireDetailEvent(event);
+            chordPanel.setChordAndColor(newChord);
+
         }
     }
 
-//    private void
+
+    public void fireDetailEvent(ChordChangeEvent event) {
+        Object[] listeners = listenerList.getListenerList();
+
+        for(int i=0; i < listeners.length; i += 2) {
+            if(listeners[i] == ChordChangeListener.class) {
+                ((ChordChangeListener)listeners[i+1]).chordChangeOccurred(event);
+            }
+        }
+    }
+
+    public void addChordChangedListener(ChordChangeListener listener) {
+        listenerList.add(ChordChangeListener.class, listener);
+    }
+
+    public void removeDetailListener(ChordChangeListener listener) {
+        listenerList.remove(ChordChangeListener.class, listener);
+    }
 }

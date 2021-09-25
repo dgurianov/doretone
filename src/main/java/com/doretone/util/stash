@@ -1,0 +1,24 @@
+
+Table column width
+public class NoteNeckTable extends JTable implements  ChordChangeListener {
+    private final NoteNeckContainer container = new NoteNeckContainer();
+    private final NoteNeckTableRenderer renderer = new NoteNeckTableRenderer();
+    public NoteNeckTable(TableModel dm) {
+        super(dm);
+        //Set column sizes
+        //Total available width
+//        setAutoResizeMode(JTable.AUTO_RESIZE_OFF);//Do not resize columns automagically
+//        getColumnModel().getColumn(0).setPreferredWidth(75);
+        setRowHeight(18);
+//        getColumnModel().getColumn(1).setPreferredWidth(75);
+//        getColumnModel().getColumn(2).setPreferredWidth(75);
+//        getColumnModel().getColumn(3).setPreferredWidth(75);
+//        getColumnModel().getColumn(4).setPreferredWidth(75);
+//        getColumnModel().getColumn(5).setPreferredWidth(75);
+//        getColumnModel().getColumn(6).setPreferredWidth(75);
+        setDefaultRenderer(String.class, renderer);
+
+    }
+
+Set font
+displayLabel.setFont(new Font("Serif", Font.BOLD, 60));
