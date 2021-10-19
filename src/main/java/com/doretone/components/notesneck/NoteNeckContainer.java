@@ -1,23 +1,25 @@
 package com.doretone.components.notesneck;
 
+import com.doretone.core.LoopedNoteIteratorNew;
+import com.doretone.core.domain.Note;
 import com.doretone.core.exceptions.InvalidNoteException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 
-
+@Slf4j
 public class NoteNeckContainer {
 
     private  HashMap<String,String[]> importantIntervalsMap ;
     private final String[][] container;
-    private LoopedNoteIterator noteIterator;
+    private LoopedNoteIteratorNew noteIterator;
 
     public NoteNeckContainer() {
         this.container = new String[7][12];
         try {
             populateContainer();
         }catch (InvalidNoteException e){
-            //TODO: Log this one
-            System.out.println(e.getLocalizedMessage());
+            log.debug("Failed to populate NoteNeckContainer. Wrong note provided. {}",e.getLocalizedMessage());
         }
         populateImportantIntervalsMap();
 
@@ -32,27 +34,29 @@ public class NoteNeckContainer {
             switch (string) {
                 case 1:
                 case 6:
-                    this.noteIterator = new LoopedNoteIterator("E");
+                    this.noteIterator = new LoopedNoteIteratorNew(new Note('E'));
                     break;
                 case 2:
-                    this.noteIterator = new LoopedNoteIterator("H");
+                    this.noteIterator = new LoopedNoteIteratorNew(new Note('H'));
                     break;
                 case 3:
-                    this.noteIterator = new LoopedNoteIterator("G");
+                    this.noteIterator = new LoopedNoteIteratorNew(new Note('G'));
                     break;
                 case 4:
-                    this.noteIterator = new LoopedNoteIterator("D");
+                    this.noteIterator = new LoopedNoteIteratorNew(new Note('D'));
                     break;
                 case 5:
-                    this.noteIterator = new LoopedNoteIterator("A");
+                    this.noteIterator = new LoopedNoteIteratorNew(new Note('A'));
                     break;
             }
 
             for(int fret = 0 ; fret < container[string].length ; fret++){
-                container[string][fret] = this.noteIterator.next();
+                container[string][fret] = this.noteIterator.nextToString();
             }
         }
     }
+
+
 
     private void populateImportantIntervalsMap(){
         importantIntervalsMap = new HashMap<>();

@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
 public class NoteNeckTableRenderer extends DefaultTableCellRenderer {
-    private String[]  cellsToColor = {"X","X","X","X","X"};
+    private String[]  cellsToColor = {"X","X","X","X","X"}; //This will get a chord
     private final Color original = IntervalLegendColor.DEFAULT.getValue();
     private final Color openStrings = IntervalLegendColor.GRAY.getValue();
 

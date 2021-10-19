@@ -4,6 +4,7 @@ import com.doretone.components.events.ChordChangeEvent;
 import com.doretone.components.listeners.ChordChangeListener;
 import com.doretone.components.renderers.NoteNeckTableRenderer;
 import com.doretone.util.ChordUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -12,6 +13,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.Arrays;
 
+@Slf4j
 public class NoteNeckTable extends JTable implements  ChordChangeListener {
     private final NoteNeckContainer container = new NoteNeckContainer();
     private final NoteNeckTableRenderer renderer = new NoteNeckTableRenderer();
@@ -31,8 +33,7 @@ public class NoteNeckTable extends JTable implements  ChordChangeListener {
 
     @Override
     public void chordChangeOccurred(ChordChangeEvent event) {
-        System.out.println(event.getChord());
-        System.out.println(Arrays.toString(container.getImportantIntervalsOf(ChordUtils.removeMinorSymbol(event.getChord()))));
+        log.debug("\nChord change event occurred! \n Event chord : {}\n Next highlighted intervals : {} ",event.getChord(),Arrays.toString(container.getImportantIntervalsOf(ChordUtils.removeMinorSymbol(event.getChord()))));
         renderer.setCellsToColor(container.getImportantIntervalsOf(ChordUtils.removeMinorSymbol(event.getChord())));
         this.repaint();
     }
